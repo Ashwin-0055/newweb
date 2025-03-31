@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agency Landing Page </title>
+   
+    <link rel="stylesheet" href="style.css">    
+</head>
+<body>
+    <header>
+        <img src="attachment_135506522-removebg-preview.png" alt="Business Logo" width="150" height="auto">
+        <h1>Graphic Design Agency</h1>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <h2>Welcome to Our Agency</h2>
+        <p>Your success is our priority. Let's grow together.</p>
+        <a href="#about">Get Started</a>
+    </section>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>We provide top-notch services to help your business thrive.
+            we bring creativity to life! We specialize in poster design, UI/UX design, and web design, helping businesses and individuals create visually stunning and user-friendly experiences. Our team is passionate about blending aesthetics with functionality, ensuring that every design we create not only looks great but also engages your audience effectively.
+
+            Whether you need a captivating poster, an intuitive website, or a seamless user experience, we’re here to turn your vision into reality. Let’s work together to create designs that leave a lasting impression!
+        </p>
+    </section>
+
+    <section id="services">
+        <h2>Our Services</h2>
+        <ul>
+            <li>Web Designs</li>
+            <li>UI and UX Designs</li>
+            <li>Poster Designs</li>
+        </ul>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+
+            <button type="submit">Send</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Graphic Design Agency. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("#contact form");
+            const modal = document.getElementById("popup-modal");
+            const closeModal = document.getElementById("close-modal");
+    
+            form.addEventListener("submit", function (event) {
+                event.preventDefault(); // Prevent form submission
+                
+                // Show custom modal
+                modal.style.display = "block";
+    
+                // Reset the form fields
+                form.reset();
+            });
+    
+            // Close the modal when clicking the button
+            closeModal.addEventListener("click", function () {
+                modal.style.display = "none";
+            });
+        });
+    </script>
+    
+
+<!-- Custom Pop-up Modal -->
+<div id="popup-modal" class="modal">
+    <div class="modal-content">
+        <h2>Thank You!</h2>
+        <p>We appreciate you choosing our agency. We will contact you within 1 hour.</p>
+        <button id="close-modal">OK</button>
+    </div>
+</div>
+
+
+    </body>
+    </html>
+    
+</body>
+</html>
