@@ -19,11 +19,10 @@ body {
 header {
     background-color: #0077b6;
     color: white;
-    padding: 20px;
+    padding: 15px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 50px;
 }
 
 header img {
@@ -54,6 +53,7 @@ nav ul li a {
     padding: 10px;
 }
 
+/* Hero Section */
 #hero {
     background-color: #48cae4;
     padding: 50px;
@@ -97,8 +97,8 @@ nav ul li a {
 
 #services ul {
     list-style: none;
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid */
     gap: 30px;
     padding: 0;
 }
@@ -108,7 +108,6 @@ nav ul li a {
     color: white;
     padding: 20px;
     border-radius: 10px;
-    width: 200px;
     font-size: 18px;
     font-weight: bold;
     transition: 0.3s ease-in-out;
@@ -163,16 +162,13 @@ nav ul li a {
     background-color: #005f8d;
 }
 
-
-section {
-    padding: 50px;
-}
-
+/* Footer Section */
 footer {
     background-color: #0077b6;
     color: white;
     padding: 10px;
 }
+
 /* Custom Modal Styles */
 .modal {
     display: none;
@@ -218,6 +214,7 @@ footer {
 #close-modal:hover {
     background-color: #005f8d;
 }
+
 /* Navigation Bar Hover Effect */
 nav ul li a {
     color: white; /* Default color */
@@ -233,19 +230,45 @@ nav ul li a:hover {
     border-radius: 5px; /* Rounded effect */
 }
 
-  .container {
-    width: 80%;  /* 80% of the screen width */
-  }
-  .container {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .item {
-    flex: 1 1 300px; /* Flexible items with a minimum width of 300px */
-  }
-  .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 1fr = fraction of available space */
-  }
-    
+/* Responsive Styles */
+@media (max-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+
+    header {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    #hero {
+        padding: 30px;
+    }
+
+    #services ul {
+        grid-template-columns: 1fr 1fr; /* Two columns layout for tablets */
+    }
+
+    .container {
+        width: 90%;  /* Increase width on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+
+    #services ul {
+        grid-template-columns: 1fr; /* One column layout for phones */
+    }
+
+    #contact form {
+        width: 100%;
+    }
+}
