@@ -4,77 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agency Landing Page</title>
-    <link rel="stylesheet" href="style.css">
-
-    <style>
-        /* Default styles for desktop */
-        body {
-            font-size: 18px;
-        }
-
-        img {
-            max-width: 100%; /* Ensures the image scales down on smaller screens */
-            height: auto;
-        }
-
-        /* Header styles */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        nav ul {
-            display: flex;
-            list-style-type: none;
-        }
-
-        nav ul li {
-            margin-right: 20px;
-        }
-
-        /* Styles for devices with a max-width of 768px (tablets and mobile devices) */
-        @media (max-width: 768px) {
-            body {
-                font-size: 16px;
-            }
-
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .container {
-                padding: 10px;
-            }
-
-            nav ul {
-                flex-direction: column;
-                margin-top: 10px;
-            }
-
-            nav ul li {
-                margin-bottom: 10px;
-            }
-
-            /* Any other adjustments for mobile layout */
-        }
-
-        /* Styles for very small devices (phones in portrait mode) */
-        @media (max-width: 480px) {
-            .header {
-                font-size: 14px;
-            }
-
-            .main-content {
-                padding: 5px;
-            }
-        }
-    </style>          
+    
+       
 </head>
 <body>
     <header>
-        <img src="attachment_135506522-removebg-preview.png" alt="Agency Logo">
+     
         <h1>Graphic Design Agency</h1>
         <nav>
             <ul>
@@ -93,7 +28,7 @@
 
     <section id="about">
         <h2>About Us</h2>
-        <p>We provide top-notch services to help your business thrive. We bring creativity to life! We specialize in poster design, UI/UX design, and web design, helping businesses and individuals create visually stunning and user-friendly experiences. Our team is passionate about blending aesthetics with functionality, ensuring that every design we create not only looks great but also engages your audience effectively.</p>
+        <p>We specialize in poster design, UI/UX design, and web design, helping businesses and individuals create visually stunning and user-friendly experiences.</p>
     </section>
 
     <section id="services">
@@ -107,16 +42,10 @@
 
     <section id="contact">
         <h2>Contact Us</h2>
-        <form>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea>
-
+        <form id="contactForm">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" placeholder="Your Message" required></textarea>
             <button type="submit">Send</button>
         </form>
     </section>
@@ -125,36 +54,71 @@
         <p>&copy; 2025 Graphic Design Agency. All rights reserved.</p>
     </footer>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const form = document.querySelector("#contact form");
-            const modal = document.getElementById("popup-modal");
-            const closeModal = document.getElementById("close-modal");
+    <script type="module">
+        import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
     
-            form.addEventListener("submit", function (event) {
-                event.preventDefault(); // Prevent form submission
-                
-                // Show custom modal
-                modal.style.display = "block";
+        // ✅ Replace with your correct Supabase project URL
+        const supabaseUrl = "https://cfbnauisnfsvucmhesnj.supabase.co";
     
-                // Reset the form fields
-                form.reset();
-            });
+        // ✅ Replace with your correct anon public key
+        const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYm5hdWlzbmZzdnVjbWhlc25qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM1MDMyNzYsImV4cCI6MjA1OTA3OTI3Nn0.3mIbG7JmfrQyw-eAdmCxiBKdTuhpBYxx7yl7Gy8xzCk";
     
-            // Close the modal when clicking the button
-            closeModal.addEventListener("click", function () {
-                modal.style.display = "none";
-            });
+        const supabase = createClient(supabaseUrl, supabaseKey);
+    
+        document.getElementById("contactForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+    
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const message = document.getElementById("message").value.trim();
+    
+            if (!name || !email || !message) {
+                alert("Please fill in all fields.");
+                return;
+            }
+    
+            try {
+                const { data, error } = await supabase.from("contacts").insert([{ name, email, message }]);
+    
+                if (error) {
+                    console.error("Error inserting data:", error.message);
+                    alert("Failed to send message. Check the console for details.");
+                } else {
+                    alert("Message sent successfully!");
+                    document.getElementById("contactForm").reset();
+                }
+            } catch (err) {
+                console.error("Unexpected error:", err);
+                alert("An unexpected error occurred.");
+            }
         });
     </script>
-
+    
     <!-- Custom Pop-up Modal -->
-    <div id="popup-modal" class="modal">
+    <div id="popup-modal" class="modal" style="display: none;">
         <div class="modal-content">
             <h2>Thank You!</h2>
             <p>We appreciate you choosing our agency. We will contact you within 1 hour.</p>
             <button id="close-modal">OK</button>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const modal = document.getElementById("popup-modal");
+            const closeModal = document.getElementById("close-modal");
+
+            document.getElementById("contactForm").addEventListener("submit", function (event) {
+                event.preventDefault();
+                modal.style.display = "block";
+                setTimeout(() => modal.style.display = "none", 3000);
+            });
+
+            closeModal.addEventListener("click", function () {
+                modal.style.display = "none";
+            });
+        });
+    </script>
+
 </body>
 </html>
