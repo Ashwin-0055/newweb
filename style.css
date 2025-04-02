@@ -99,28 +99,41 @@ nav ul li a {
     margin-bottom: 20px;
 }
 
-#services ul {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid */
-    gap: 30px;
-    padding: 0;
+.services-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
-#services li {
+.service-card {
     background-color: #48cae4;
     color: white;
     padding: 20px;
     border-radius: 10px;
     font-size: 18px;
     font-weight: bold;
+    width: 250px;
+    text-align: center;
     transition: 0.3s ease-in-out;
 }
 
-#services li:hover {
+.service-card:hover {
     background-color: #0077b6;
     transform: scale(1.1);
 }
+
+@media (max-width: 768px) {
+    .services-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .service-card {
+        width: 90%;
+    }
+}
+
 
 /* Contact Us Section */
 #contact {
