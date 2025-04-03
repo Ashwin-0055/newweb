@@ -10,6 +10,7 @@ body {
     background-color: #f4f4f9;
     color: #333333;
     text-align: center;
+    scroll-behavior: smooth;
 }
 
 /* Header Navigation Bar */
@@ -84,10 +85,12 @@ nav ul li a:hover {
     font-weight: bold;
     display: inline-block;
     margin-top: 15px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 #hero a:hover {
     background-color: #d62828;
+    transform: scale(1.05);
 }
 
 /* Our Services Section */
@@ -117,7 +120,8 @@ nav ul li a:hover {
     font-size: 18px;
     font-weight: bold;
     width: 250px;
-    transition: 0.3s ease-in-out;
+    text-align: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .service-card:hover {
@@ -162,10 +166,12 @@ nav ul li a:hover {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 #contact button:hover {
     background-color: #005f8d;
+    transform: scale(1.05);
 }
 
 /* Footer Section */
@@ -253,12 +259,9 @@ footer {
         font-size: 28px;
     }
 
-    #services ul {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .container {
-        width: 90%;
+    .services-container {
+        flex-direction: column;
+        align-items: center;
     }
 
     #contact form {
@@ -279,10 +282,6 @@ footer {
         font-size: 16px;
     }
 
-    #services ul {
-        grid-template-columns: 1fr;
-    }
-
     header h1 {
         font-size: 20px;
     }
@@ -291,3 +290,4 @@ footer {
         width: 70px;
     }
 }
+

@@ -5,61 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Graphic Design Agency</title>
   <link rel="stylesheet" href="style.css"/>
+  <!-- AOS Animation CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+
 </head>
 <body>
-  <header>
-    <h1>Graphic Design Agency</h1>
-    <nav>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <section id="hero">
-    <h2>Welcome to Our Agency</h2>
-    <p>Your success is our priority. Let's grow together.</p>
-    <a href="#about">Get Started</a>
-  </section>
-
-  <section id="about">
-    <h2>About Us</h2>
-    <p>We specialize in poster design, UI/UX design, and web design, helping businesses and individuals create visually stunning and user-friendly experiences.</p>
-  </section>
-
-  <section id="services">
-    <h2>Our Services</h2>
-    <div class="services-container">
-      <div class="service-card">Web Designs</div>
-      <div class="service-card">UI and UX Designs</div>
-      <div class="service-card">Poster Designs</div>
+    <header data-aos="fade-down">
+      <h1>Graphic Design Agency</h1>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+  
+    <section id="hero" data-aos="fade-up">
+      <h2>Welcome to Our Agency</h2>
+      <p>Your success is our priority. Let's grow together.</p>
+      <a href="#about" data-aos="zoom-in" data-aos-delay="200">Get Started</a>
+    </section>
+  
+    <section id="about" data-aos="fade-right">
+      <h2>About Us</h2>
+      <p>We specialize in poster design, UI/UX design, and web design, helping businesses and individuals create visually stunning and user-friendly experiences.</p>
+    </section>
+  
+    <section id="services" data-aos="fade-up">
+      <h2>Our Services</h2>
+      <div class="services-container">
+        <div class="service-card" data-aos="zoom-in" data-aos-delay="100">Web Designs</div>
+        <div class="service-card" data-aos="zoom-in" data-aos-delay="200">UI and UX Designs</div>
+        <div class="service-card" data-aos="zoom-in" data-aos-delay="300">Poster Designs</div>
+      </div>
+    </section>
+  
+    <section id="contact" data-aos="fade-up">
+      <h2>Contact Us</h2>
+      <form id="contact-form" name="contact-form" data-aos="fade-up" data-aos-delay="200">
+        <input type="text" name="user_name" id="name" placeholder="Your Name" required />
+        <input type="email" name="user_email" id="email" placeholder="Your Email" required />
+        <textarea name="message" id="message" placeholder="Your Message" required></textarea>
+        <button type="submit" data-aos="zoom-in" data-aos-delay="300">Send</button>
+      </form>
+    </section>
+  
+    <footer data-aos="fade-up">
+      <p>&copy; 2025 Graphic Design Agency. All rights reserved.</p>
+    </footer>
+  
+    <div id="popup-modal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <h2>Thank You!</h2>
+        <p>We appreciate you choosing our agency. We will contact you within 1 hour.</p>
+        <button id="close-modal">OK</button>
+      </div>
     </div>
-  </section>
-
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <form id="contact-form" name="contact-form">
-      <input type="text" name="user_name" id="name" placeholder="Your Name" required />
-      <input type="email" name="user_email" id="email" placeholder="Your Email" required />
-      <textarea name="message" id="message" placeholder="Your Message" required></textarea>
-      <button type="submit">Send</button>
-    </form>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Graphic Design Agency. All rights reserved.</p>
-  </footer>
-
-  <!-- Confirmation Modal -->
-  <div id="popup-modal" class="modal" style="display: none;">
-    <div class="modal-content">
-      <h2>Thank You!</h2>
-      <p>We appreciate you choosing our agency. We will contact you within 1 hour.</p>
-      <button id="close-modal">OK</button>
-    </div>
-  </div>
+  </body>
+  
 
   <!-- EmailJS SDK -->
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
@@ -143,6 +147,15 @@
       });
     });
   </script>
+  <!-- AOS Script -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000, // animation speed
+    once: true      // animate only once
+  });
+</script>
+
   
 </body>
 </html>
