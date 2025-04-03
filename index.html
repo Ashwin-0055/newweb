@@ -5,108 +5,95 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Graphic Design Agency</title>
   <link rel="stylesheet" href="style.css"/>
+
   <!-- AOS Animation CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
 </head>
 <body>
-  <div class="page-wrapper">
 
-    <header data-aos="fade-down">
-      <div class="header-left">
-        <h1>Graphic Design Agency</h1>
+  <header data-aos="fade-down">
+    <h1>Graphic Design Agency</h1>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+      <input type="checkbox" id="theme-switcher">
+      <label for="theme-switcher" class="theme-icon">
+        <span class="sun">☀️</span>
+        <span class="moon">🌙</span>
+      </label>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero" data-aos="fade-up">
+      <h2>Welcome to Our Agency</h2>
+      <p>Your success is our priority. Let's grow together.</p>
+      <a href="#about" data-aos="zoom-in" data-aos-delay="200">Get Started</a>
+    </section>
+
+    <section id="about" data-aos="fade-right">
+      <h2>About Us</h2>
+      <p>We specialize in poster design, UI/UX design, and web design, helping businesses and individuals create visually stunning and user-friendly experiences.</p>
+    </section>
+
+    <section id="services" data-aos="fade-up">
+      <h2>Our Services</h2>
+      <div class="services-container">
+        <div class="service-card" data-aos="zoom-in" data-aos-delay="100">Web Designs</div>
+        <div class="service-card" data-aos="zoom-in" data-aos-delay="200">UI and UX Designs</div>
+        <div class="service-card" data-aos="zoom-in" data-aos-delay="300">Poster Designs</div>
       </div>
+    </section>
 
-      <nav class="header-center">
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+    <section id="contact" data-aos="fade-up">
+      <h2>Contact Us</h2>
+      <form id="contact-form" name="contact-form" data-aos="fade-up" data-aos-delay="200">
+        <input type="text" name="user_name" id="name" placeholder="Your Name" required />
+        <input type="email" name="user_email" id="email" placeholder="Your Email" required />
+        <textarea name="message" id="message" placeholder="Your Message" required></textarea>
+        <button type="submit" data-aos="zoom-in" data-aos-delay="300">Send</button>
+      </form>
+    </section>
+  </main>
 
-      <!-- 🌗 Theme Toggle Button -->
-      <div class="theme-toggle">
-        <input type="checkbox" id="theme-switcher">
-        <label for="theme-switcher" class="theme-icon">
-          <span class="sun">☀️</span>
-          <span class="moon">🌙</span>
-        </label>
-      </div>
-    </header>
+  <footer data-aos="fade-up">
+    <p>&copy; 2025 Graphic Design Agency. All rights reserved.</p>
+  </footer>
 
-    <main>
-      <section id="hero" data-aos="fade-up">
-        <h2>Welcome to Our Agency</h2>
-        <p>Your success is our priority. Let's grow together.</p>
-        <a href="#about" data-aos="zoom-in" data-aos-delay="200">Get Started</a>
-      </section>
-
-      <section id="about" data-aos="fade-right">
-        <h2>About Us</h2>
-        <p>We specialize in poster design, UI/UX design, and web design, helping businesses and individuals create visually stunning and user-friendly experiences.</p>
-      </section>
-
-      <section id="services" data-aos="fade-up">
-        <h2>Our Services</h2>
-        <div class="services-container">
-          <div class="service-card" data-aos="zoom-in" data-aos-delay="100">Web Designs</div>
-          <div class="service-card" data-aos="zoom-in" data-aos-delay="200">UI and UX Designs</div>
-          <div class="service-card" data-aos="zoom-in" data-aos-delay="300">Poster Designs</div>
-        </div>
-      </section>
-
-      <section id="contact" data-aos="fade-up">
-        <h2>Contact Us</h2>
-        <form id="contact-form" name="contact-form" data-aos="fade-up" data-aos-delay="200">
-          <input type="text" name="user_name" id="name" placeholder="Your Name" required />
-          <input type="email" name="user_email" id="email" placeholder="Your Email" required />
-          <textarea name="message" id="message" placeholder="Your Message" required></textarea>
-          <button type="submit" data-aos="zoom-in" data-aos-delay="300">Send</button>
-        </form>
-      </section>
-    </main>
-
-    <footer data-aos="fade-up">
-      <p>&copy; 2025 Graphic Design Agency. All rights reserved.</p>
-    </footer>
-
-    <!-- Modal -->
-    <div id="popup-modal" class="modal" style="display: none;">
-      <div class="modal-content">
-        <h2>Thank You!</h2>
-        <p>We appreciate you choosing our agency. We will contact you within 1 hour.</p>
-        <button id="close-modal">OK</button>
-      </div>
+  <!-- Confirmation Modal -->
+  <div id="popup-modal" class="modal">
+    <div class="modal-content">
+      <h2>Thank You!</h2>
+      <p>We appreciate you choosing our agency. We will contact you within 1 hour.</p>
+      <button id="close-modal">OK</button>
     </div>
   </div>
 
-  <!-- EmailJS SDK -->
+  <!-- Scripts -->
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
+    AOS.init({
+      duration: 1000,
+      once: false,
+      mirror: true
+    });
+
     document.addEventListener("DOMContentLoaded", async () => {
-      console.log("📦 DOM loaded");
+      const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
+      const supabase = createClient(
+        "https://cfbnauisnfsvucmhesnj.supabase.co",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYm5hdWlzbmZzdnVjbWhlc25qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM1MDMyNzYsImV4cCI6MjA1OTA3OTI3Nn0.3mIbG7JmfrQyw-eAdmCxiBKdTuhpBYxx7yl7Gy8xzCk"
+      );
 
-      let supabase;
-      try {
-        const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
-        supabase = createClient(
-          "https://cfbnauisnfsvucmhesnj.supabase.co",
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-        );
-        console.log("✅ Supabase initialized");
-      } catch (err) {
-        console.error("❌ Failed to initialize Supabase", err);
-        return;
-      }
-
-      try {
-        emailjs.init("D7Br6wrrWXTRBxguy");
-        console.log("✅ EmailJS initialized");
-      } catch (err) {
-        console.error("❌ Failed to initialize EmailJS", err);
-        return;
-      }
+      emailjs.init("D7Br6wrrWXTRBxguy");
 
       const form = document.getElementById("contact-form");
       const modal = document.getElementById("popup-modal");
@@ -114,6 +101,7 @@
 
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
+
         const name = document.getElementById("name").value.trim();
         const email = document.getElementById("email").value.trim();
         const message = document.getElementById("message").value.trim();
@@ -124,57 +112,40 @@
         }
 
         try {
-          const { error } = await supabase.from("contacts").insert([{ name, email, message }]);
-          if (error) throw error;
-        } catch (err) {
-          alert("❌ Failed to save your message.");
-          return;
-        }
-
-        try {
+          await supabase.from("contacts").insert([{ name, email, message }]);
           await emailjs.sendForm("service_x87fn9r", "template_lrppuq7", form);
           modal.style.display = "block";
           setTimeout(() => (modal.style.display = "none"), 3000);
           form.reset();
         } catch (err) {
-          alert("❌ Failed to send confirmation email.");
+          console.error(err);
+          alert("Something went wrong. Try again!");
         }
       });
 
       closeModal.addEventListener("click", () => {
         modal.style.display = "none";
       });
-    });
-  </script>
 
-  <!-- AOS Script -->
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      duration: 1000,
-      once: false,
-      mirror: true
-    });
-  </script>
-
-  <script>
-    const themeToggle = document.getElementById("theme-switcher");
-    const body = document.body;
-
-    if (localStorage.getItem("theme") === "dark") {
-      body.classList.add("dark");
-      themeToggle.checked = true;
-    }
-
-    themeToggle.addEventListener("change", () => {
-      if (themeToggle.checked) {
-        body.classList.add("dark");
-        localStorage.setItem("theme", "dark");
-      } else {
-        body.classList.remove("dark");
-        localStorage.setItem("theme", "light");
+      // Theme switcher
+      const themeToggle = document.getElementById("theme-switcher");
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark");
+        themeToggle.checked = true;
       }
+
+      themeToggle.addEventListener("change", () => {
+        if (themeToggle.checked) {
+          document.body.classList.add("dark");
+          localStorage.setItem("theme", "dark");
+        } else {
+          document.body.classList.remove("dark");
+          localStorage.setItem("theme", "light");
+        }
+      });
     });
   </script>
+
 </body>
 </html>
+
