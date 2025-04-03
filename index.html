@@ -1,150 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agency Landing Page</title>
-    
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agency Landing Page</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-    <header>
-     
-        <h1>Graphic Design Agency</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <h1>Graphic Design Agency</h1>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <section id="hero">
-        <h2>Welcome to Our Agency</h2>
-        <p>Your success is our priority. Let's grow together.</p>
-        <a href="#about">Get Started</a>
-    </section>
+  <section id="hero">
+    <h2>Welcome to Our Agency</h2>
+    <p>Your success is our priority. Let's grow together.</p>
+    <a href="#about">Get Started</a>
+  </section>
 
-    <section id="about">
-        <h2>About Us</h2>
-        <p>We specialize in poster design, UI/UX design, and web design, helping businesses and individuals create visually stunning and user-friendly experiences.</p>
-    </section>
+  <section id="about">
+    <h2>About Us</h2>
+    <p>We specialize in poster design, UI/UX design, and web design, helping businesses and individuals create visually stunning and user-friendly experiences.</p>
+  </section>
 
-    <section id="services">
-        <h2>Our Services</h2>
-        <div class="services-container">
-            <div class="service-card">Web Designs</div>
-            <div class="service-card">UI and UX Designs</div>
-            <div class="service-card">Poster Designs</div>
-        </div>
-    </section>
-    
-
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <form id="contact-form">
-            <input type="text" name="user_name" placeholder="Your Name" required />
-            <input type="email" name="user_email" placeholder="Your Email" required />
-            <textarea name="message" placeholder="Your Message" required></textarea>
-            <button type="submit">Send</button>
-          </form>
-          
-    </section>
-
-    <footer>
-        <p>&copy; 2025 Graphic Design Agency. All rights reserved.</p>
-    </footer>
-
-    <script type="module">
-        import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-    
-        // ✅ Replace with your correct Supabase project URL
-        const supabaseUrl = "https://cfbnauisnfsvucmhesnj.supabase.co";
-    
-        // ✅ Replace with your correct anon public key
-        const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYm5hdWlzbmZzdnVjbWhlc25qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM1MDMyNzYsImV4cCI6MjA1OTA3OTI3Nn0.3mIbG7JmfrQyw-eAdmCxiBKdTuhpBYxx7yl7Gy8xzCk";
-    
-        const supabase = createClient(supabaseUrl, supabaseKey);
-    
-        document.getElementById("contactForm").addEventListener("submit", async (e) => {
-            e.preventDefault();
-    
-            const name = document.getElementById("name").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const message = document.getElementById("message").value.trim();
-    
-            if (!name || !email || !message) {
-                alert("Please fill in all fields.");
-                return;
-            }
-    
-            try {
-                const { data, error } = await supabase.from("contacts").insert([{ name, email, message }]);
-    
-                if (error) {
-                    console.error("Error inserting data:", error.message);
-                    alert("Failed to send message. Check the console for details.");
-                } else {
-                    alert("Message sent successfully!");
-                    document.getElementById("contactForm").reset();
-                }
-            } catch (err) {
-                console.error("Unexpected error:", err);
-                alert("An unexpected error occurred.");
-            }
-        });
-    </script>
-    
-    <!-- Custom Pop-up Modal -->
-    <div id="popup-modal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <h2>Thank You!</h2>
-            <p>We appreciate you choosing our agency. We will contact you within 1 hour.</p>
-            <button id="close-modal">OK</button>
-        </div>
+  <section id="services">
+    <h2>Our Services</h2>
+    <div class="services-container">
+      <div class="service-card">Web Designs</div>
+      <div class="service-card">UI and UX Designs</div>
+      <div class="service-card">Poster Designs</div>
     </div>
+  </section>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const modal = document.getElementById("popup-modal");
-            const closeModal = document.getElementById("close-modal");
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <form id="contact-form">
+      <input type="text" name="user_name" id="name" placeholder="Your Name" required />
+      <input type="email" name="user_email" id="email" placeholder="Your Email" required />
+      <textarea name="message" id="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
 
-            document.getElementById("contactForm").addEventListener("submit", function (event) {
-                event.preventDefault();
-                modal.style.display = "block";
-                setTimeout(() => modal.style.display = "none", 3000);
-            });
+  <footer>
+    <p>&copy; 2025 Graphic Design Agency. All rights reserved.</p>
+  </footer>
 
-            closeModal.addEventListener("click", function () {
-                modal.style.display = "none";
-            });
-        });
-    </script>
-    <!-- EmailJS SDK -->
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <!-- Confirmation Modal -->
+  <div id="popup-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <h2>Thank You!</h2>
+      <p>We appreciate you choosing our agency. We will contact you within 1 hour.</p>
+      <button id="close-modal">OK</button>
+    </div>
+  </div>
 
-<script>
-  // Initialize EmailJS
-  (function(){
-    emailjs.init(D7Br6wrrWXTRBxguy); // Replace with your actual public key
-  })();
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
-  // Handle form submission
-  document.getElementById("contact-form").addEventListener("submit", function(event) {
-    event.preventDefault();
+  <!-- App Logic -->
+  <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-    emailjs.sendForm("service_x87fn9r", "template_lrppuq7", this)
-      .then(function() {
-        alert("✅ Message sent successfully! Check your inbox.");
-        document.getElementById("contact-form").reset();
-      }, function(error) {
-        alert("❌ Failed to send message. Try again.");
-        console.error(error);
+    const supabase = createClient(
+      "https://cfbnauisnfsvucmhesnj.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYm5hdWlzbmZzdnVjbWhlc25qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM1MDMyNzYsImV4cCI6MjA1OTA3OTI3Nn0.3mIbG7JmfrQyw-eAdmCxiBKdTuhpBYxx7yl7Gy8xzCk"
+    );
+
+    document.addEventListener("DOMContentLoaded", () => {
+      emailjs.init("D7Br6wrrWXTRBxguy"); // ✅ Replace with your EmailJS public key
+
+      const form = document.getElementById("contact-form");
+      const modal = document.getElementById("popup-modal");
+      const closeModal = document.getElementById("close-modal");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        if (!name || !email || !message) {
+          alert("Please fill in all fields.");
+          return;
+        }
+
+        // Store in Supabase
+        try {
+          const { error } = await supabase
+            .from("contacts")
+            .insert([{ name, email, message }]);
+
+          if (error) throw error;
+        } catch (err) {
+          alert("❌ Error saving message to database.");
+          console.error(err);
+          return;
+        }
+
+        // Send Email with EmailJS
+        emailjs.sendForm("service_x87fn9r", "template_lrppuq7", form)
+          .then(() => {
+            modal.style.display = "block";
+            setTimeout(() => (modal.style.display = "none"), 3000);
+            form.reset();
+          })
+          .catch((error) => {
+            console.error("EmailJS Error:", error);
+            alert("❌ Email could not be sent.");
+          });
       });
-  });
-</script>
 
-
+      closeModal.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
+    });
+  </script>
 </body>
 </html>
