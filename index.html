@@ -64,68 +64,85 @@
   <!-- EmailJS SDK -->
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
-  <!-- Supabase + Form Submission Logic -->
   <script>
-    // Load Supabase dynamically
-    (async () => {
-      const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
-
-      const supabase = createClient(
-        "https://cfbnauisnfsvucmhesnj.supabase.co",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYm5hdWlzbmZzdnVjbWhlc25qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM1MDMyNzYsImV4cCI6MjA1OTA3OTI3Nn0.3mIbG7JmfrQyw-eAdmCxiBKdTuhpBYxx7yl7Gy8xzCk"
-      );
-
-      document.addEventListener("DOMContentLoaded", function () {
-        emailjs.init("D7Br6wrrWXTRBxguy"); // ✅ Your EmailJS Public Key
-
-        const form = document.getElementById("contact-form");
-        const modal = document.getElementById("popup-modal");
-        const closeModal = document.getElementById("close-modal");
-
-        form.addEventListener("submit", async function (e) {
-          e.preventDefault();
-
-          const name = document.getElementById("name").value.trim();
-          const email = document.getElementById("email").value.trim();
-          const message = document.getElementById("message").value.trim();
-
-          if (!name || !email || !message) {
-            alert("Please fill in all fields.");
-            return;
-          }
-
-          // Store data in Supabase
-          try {
-            const { error } = await supabase
-              .from("contacts")
-              .insert([{ name, email, message }]);
-
-            if (error) throw error;
-          } catch (err) {
-            alert("❌ Failed to save message.");
-            console.error(err);
-            return;
-          }
-
-          // Send Email via EmailJS
-          emailjs.sendForm("service_x87fn9r", "template_lrppuq7", form)
-            .then(() => {
-              modal.style.display = "block";
-              setTimeout(() => (modal.style.display = "none"), 3000);
-              form.reset();
-            })
-            .catch((error) => {
-              console.error("❌ EmailJS Error:", error);
-              alert("❌ Email could not be sent.");
-            });
-        });
-
-        // Close modal
-        closeModal.addEventListener("click", function () {
-          modal.style.display = "none";
-        });
+    document.addEventListener("DOMContentLoaded", async () => {
+      // Show we entered the DOM block
+      console.log("📦 DOM loaded");
+  
+      // ✅ Load Supabase client dynamically
+      let supabase;
+      try {
+        const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
+        supabase = createClient(
+          "https://cfbnauisnfsvucmhesnj.supabase.co",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYm5hdWlzbmZzdnVjbWhlc25qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM1MDMyNzYsImV4cCI6MjA1OTA3OTI3Nn0.3mIbG7JmfrQyw-eAdmCxiBKdTuhpBYxx7yl7Gy8xzCk"
+        );
+        console.log("✅ Supabase initialized");
+      } catch (err) {
+        console.error("❌ Failed to initialize Supabase", err);
+        return;
+      }
+  
+      // ✅ Initialize EmailJS
+      try {
+        emailjs.init("D7Br6wrrWXTRBxguy"); // Your actual public key
+        console.log("✅ EmailJS initialized");
+      } catch (err) {
+        console.error("❌ Failed to initialize EmailJS", err);
+        return;
+      }
+  
+      // 🔗 Form and modal references
+      const form = document.getElementById("contact-form");
+      const modal = document.getElementById("popup-modal");
+      const closeModal = document.getElementById("close-modal");
+  
+      // 📨 Submit event
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        console.log("📨 Form submitted");
+  
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const message = document.getElementById("message").value.trim();
+  
+        if (!name || !email || !message) {
+          alert("Please fill in all fields.");
+          return;
+        }
+  
+        // 🧾 Store in Supabase
+        try {
+          const { error } = await supabase.from("contacts").insert([{ name, email, message }]);
+          if (error) throw error;
+          console.log("✅ Supabase: Data inserted");
+        } catch (err) {
+          console.error("❌ Supabase error", err);
+          alert("❌ Failed to save your message.");
+          return;
+        }
+  
+        // ✉️ Send email via EmailJS
+        try {
+          await emailjs.sendForm("service_x87fn9r", "template_lrppuq7", form);
+          console.log("✅ EmailJS: Email sent");
+  
+          // Show confirmation
+          modal.style.display = "block";
+          setTimeout(() => (modal.style.display = "none"), 3000);
+          form.reset();
+        } catch (err) {
+          console.error("❌ EmailJS error", err);
+          alert("❌ Failed to send confirmation email.");
+        }
       });
-    })();
+  
+      // ✖️ Close modal
+      closeModal.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
+    });
   </script>
+  
 </body>
 </html>
