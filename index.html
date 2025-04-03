@@ -64,17 +64,21 @@
   <!-- EmailJS SDK -->
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
-  <!-- App Logic -->
-  <script type="module">
-    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+  <!-- Supabase and App Logic (NO module!) -->
+  <script>
+    // Initialize Supabase (no module)
+    const SUPABASE_URL = "https://cfbnauisnfsvucmhesnj.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYm5hdWlzbmZzdnVjbWhlc25qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM1MDMyNzYsImV4cCI6MjA1OTA3OTI3Nn0.3mIbG7JmfrQyw-eAdmCxiBKdTuhpBYxx7yl7Gy8xzCk";
 
-    const supabase = createClient(
-      "https://cfbnauisnfsvucmhesnj.supabase.co",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmYm5hdWlzbmZzdnVjbWhlc25qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM1MDMyNzYsImV4cCI6MjA1OTA3OTI3Nn0.3mIbG7JmfrQyw-eAdmCxiBKdTuhpBYxx7yl7Gy8xzCk"
-    );
+    let supabase;
+    (async () => {
+      const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
+      supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+    })();
 
+    // DOM Ready
     document.addEventListener("DOMContentLoaded", () => {
-      emailjs.init("D7Br6wrrWXTRBxguy"); // ✅ Replace with your EmailJS public key
+      emailjs.init("D7Br6wrrWXTRBxguy"); // ✅ Replace with your public key
 
       const form = document.getElementById("contact-form");
       const modal = document.getElementById("popup-modal");
@@ -82,6 +86,7 @@
 
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
+        console.log("📨 Form submitted");
 
         const name = document.getElementById("name").value.trim();
         const email = document.getElementById("email").value.trim();
@@ -92,28 +97,27 @@
           return;
         }
 
-        // Store in Supabase
+        // Save to Supabase
         try {
-          const { error } = await supabase
-            .from("contacts")
-            .insert([{ name, email, message }]);
-
+          const { error } = await supabase.from("contacts").insert([{ name, email, message }]);
           if (error) throw error;
         } catch (err) {
-          alert("❌ Error saving message to database.");
+          alert("❌ Failed to save message.");
           console.error(err);
           return;
         }
 
-        // Send Email with EmailJS
+        // Send Email
+        console.log("📧 Sending email...");
         emailjs.sendForm("service_x87fn9r", "template_lrppuq7", form)
           .then(() => {
+            console.log("✅ Email sent successfully");
             modal.style.display = "block";
             setTimeout(() => (modal.style.display = "none"), 3000);
             form.reset();
           })
           .catch((error) => {
-            console.error("EmailJS Error:", error);
+            console.error("❌ EmailJS Error:", error);
             alert("❌ Email could not be sent.");
           });
       });
