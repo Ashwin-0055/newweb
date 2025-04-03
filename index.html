@@ -8,18 +8,25 @@
   <!-- AOS Animation CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
 
-</head>
-<body>
-    <header data-aos="fade-down">
-      <h1>Graphic Design Agency</h1>
-      <nav>
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
+<header data-aos="fade-down">
+    <h1>Graphic Design Agency</h1>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  
+    <!-- 🌗 Theme Toggle Button -->
+    <div class="theme-toggle">
+      <input type="checkbox" id="theme-switcher">
+      <label for="theme-switcher" class="theme-icon">
+        <span class="sun">☀️</span>
+        <span class="moon">🌙</span>
+      </label>
+    </div>
+  </header>
   
     <section id="hero" data-aos="fade-up">
       <h2>Welcome to Our Agency</h2>
@@ -155,6 +162,28 @@
     once: true      // animate only once
   });
 </script>
+<script>
+    const themeToggle = document.getElementById("theme-switcher");
+    const body = document.body;
+  
+    // Load theme from localStorage
+    if (localStorage.getItem("theme") === "dark") {
+      body.classList.add("dark");
+      themeToggle.checked = true;
+    }
+  
+    // Toggle theme
+    themeToggle.addEventListener("change", () => {
+      if (themeToggle.checked) {
+        body.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+      } else {
+        body.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+      }
+    });
+  </script>
+  
 
   
 </body>
