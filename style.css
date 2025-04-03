@@ -1,4 +1,20 @@
-* {
+/* Base layout for full height */
+html, body {
+    height: 100%;
+  }
+  
+  .page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  main {
+    flex: 1;
+  }
+  
+  /* Reset & Global */
+  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -13,7 +29,7 @@
     scroll-behavior: smooth;
   }
   
-  /* Header Navigation Bar */
+  /* Header */
   header {
     background-color: #0077b6;
     color: white;
@@ -84,7 +100,7 @@
     opacity: 0;
   }
   
-  /* Hero Section */
+  /* Hero */
   #hero {
     background-color: #48cae4;
     padding: 60px 20px;
@@ -119,7 +135,7 @@
     transform: scale(1.05);
   }
   
-  /* Our Services Section */
+  /* Services */
   #services {
     background-color: #ffffff;
     padding: 50px 20px;
@@ -155,7 +171,7 @@
     transform: scale(1.1);
   }
   
-  /* Contact Us Section */
+  /* Contact */
   #contact {
     background-color: #f8f9fa;
     padding: 50px 20px;
@@ -201,14 +217,15 @@
     transform: scale(1.05);
   }
   
-  /* Footer Section */
+  /* Footer */
   footer {
     background-color: #0077b6;
     color: white;
     padding: 10px 20px;
+    text-align: center;
   }
   
-  /* Custom Modal Styles */
+  /* Modal */
   .modal {
     display: none;
     position: fixed;
@@ -254,7 +271,7 @@
     background-color: #005f8d;
   }
   
-  /* Dark Theme Colors */
+  /* Dark Theme */
   body.dark {
     background-color: #1e1e1e;
     color: #f4f4f4;
@@ -282,7 +299,7 @@
     color: #fff;
   }
   
-  /* Responsive Styles */
+  /* Responsive */
   @media (max-width: 768px) {
     body {
       font-size: 16px;
@@ -297,6 +314,10 @@
     nav ul {
       flex-direction: column;
       align-items: flex-start;
+    }
+  
+    .theme-toggle {
+      align-self: flex-end;
     }
   
     #hero {
@@ -314,10 +335,6 @@
   
     #contact form {
       width: 100%;
-    }
-  
-    .theme-toggle {
-      align-self: flex-end;
     }
   }
   
