@@ -9,8 +9,6 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
     color: #333333;
-    margin: 0;
-    padding: 0;
     text-align: center;
 }
 
@@ -36,9 +34,9 @@ header h1 {
 
 nav ul {
     list-style: none;
-    padding: 0;
     display: flex;
     gap: 20px;
+    padding: 0;
 }
 
 nav ul li {
@@ -50,13 +48,19 @@ nav ul li a {
     text-decoration: none;
     font-weight: bold;
     padding: 10px 15px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ff6b6b;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
 }
 
 /* Hero Section */
 #hero {
     background-color: #48cae4;
     padding: 60px 20px;
-    text-align: center;
 }
 
 #hero h2 {
@@ -90,7 +94,6 @@ nav ul li a {
 #services {
     background-color: #ffffff;
     padding: 50px 20px;
-    text-align: center;
 }
 
 #services h2 {
@@ -114,7 +117,6 @@ nav ul li a {
     font-size: 18px;
     font-weight: bold;
     width: 250px;
-    text-align: center;
     transition: 0.3s ease-in-out;
 }
 
@@ -123,23 +125,10 @@ nav ul li a {
     transform: scale(1.1);
 }
 
-@media (max-width: 768px) {
-    .services-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .service-card {
-        width: 90%;
-    }
-}
-
-
 /* Contact Us Section */
 #contact {
     background-color: #f8f9fa;
     padding: 50px 20px;
-    text-align: center;
 }
 
 #contact h2 {
@@ -232,21 +221,6 @@ footer {
     background-color: #005f8d;
 }
 
-/* Navigation Bar Hover Effect */
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 10px 15px;
-    transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-nav ul li a:hover {
-    color: #ff6b6b;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 5px;
-}
-
 /* Responsive Styles */
 @media (max-width: 768px) {
     body {
@@ -286,138 +260,9 @@ nav ul li a:hover {
     .container {
         width: 90%;
     }
-}
-
-@media (max-width: 480px) {
-    body {
-        font-size: 14px;
-    }
-
-    #hero h2 {
-        font-size: 24px;
-    }
-
-    #hero p {
-        font-size: 16px;
-    }
-
-    #services ul {
-        grid-template-columns: 1fr;
-    }
 
     #contact form {
         width: 100%;
-    }
-
-    header h1 {
-        font-size: 20px;
-    }
-
-    header img {
-        width: 70px;
-    }
-}
-
-
-/* Custom Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-    background-color: white;
-    margin: 15% auto;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    width: 300px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.modal-content h2 {
-    color: #0077b6;
-}
-
-.modal-content p {
-    font-size: 16px;
-    color: #333;
-    margin: 10px 0;
-}
-
-#close-modal {
-    background-color: #0077b6;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-#close-modal:hover {
-    background-color: #005f8d;
-}
-
-/* Navigation Bar Hover Effect */
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 10px 15px;
-    transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-nav ul li a:hover {
-    color: #ff6b6b;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 5px;
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-    body {
-        font-size: 16px;
-    }
-
-    header {
-        flex-direction: column;
-        padding: 15px;
-    }
-
-    header img {
-        width: 80px;
-    }
-
-    header h1 {
-        font-size: 22px;
-    }
-
-    nav ul {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    #hero {
-        padding: 40px 20px;
-    }
-
-    #hero h2 {
-        font-size: 28px;
-    }
-
-    #services ul {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .container {
-        width: 90%;
     }
 }
 
@@ -436,10 +281,6 @@ nav ul li a:hover {
 
     #services ul {
         grid-template-columns: 1fr;
-    }
-
-    #contact form {
-        width: 100%;
     }
 
     header h1 {
