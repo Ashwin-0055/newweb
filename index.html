@@ -161,10 +161,13 @@
   <!-- AOS Script -->
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script>
-  AOS.init({
-    duration: 1000, // animation speed
-    once: true      // animate only once
-  });
+AOS.init({
+  duration: 1000,
+  once: false,
+  mirror: true // animate when scrolling back up too
+});
+
+
 </script>
 <script>
     const themeToggle = document.getElementById("theme-switcher");
